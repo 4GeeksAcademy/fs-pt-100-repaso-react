@@ -1,6 +1,8 @@
-export const initialStore=()=>{
-  return{
+export const initialStore = () => {
+  return {
     message: null,
+    digimon: null,
+    digimons: [],
     todos: [
       {
         id: 1,
@@ -17,10 +19,20 @@ export const initialStore=()=>{
 }
 
 export default function storeReducer(store, action = {}) {
-  switch(action.type){
+  switch (action.type) {
+    case 'digimon_single':
+      return {
+        ...store,
+        digimon: action.payload
+      }
+    case 'digimon_list':
+      return {
+        ...store,
+        digimons: action.payload
+      }
     case 'add_task':
 
-      const { id,  color } = action.payload
+      const { id, color } = action.payload
 
       return {
         ...store,
@@ -28,5 +40,5 @@ export default function storeReducer(store, action = {}) {
       };
     default:
       throw Error('Unknown action.');
-  }    
+  }
 }
